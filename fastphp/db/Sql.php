@@ -132,10 +132,3 @@ class Sql{
         return $sth;
     }
 }
-
-// require_once __DIR__.'/Db.php';
-// $table = new Sql('student');
-
-
-// $data = $table->add(['no'=>'10003','name'=>'张三','sex'=>'男','age'=>22]);
-// var_dump($data);
