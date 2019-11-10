@@ -8,15 +8,16 @@
 // +----------------------------------------------------------------------
 // | Author: ghfhaifeng <ghfhaifeng@163.com>
 // +----------------------------------------------------------------------
-//配置文件
+//框架模型
 
-return [
-    'db' => [
-        'host' => 'localhost',
-        'username' => 'root',
-        'password' => 'root',
-        'dbname' => 'myschool',
-    ],
-    'defaultController' => 'index',
-    'defaultAction' => 'index',
-];
+namespace antphp\base;
+
+use antphp\db\Sql;
+
+class Model extends Sql
+{
+    public function __construct($table)
+    {
+        parent::__construct($table);
+    }
+}

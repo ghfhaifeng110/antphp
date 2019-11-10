@@ -1,7 +1,19 @@
 <?php
-namespace fastphp\base;
+// +----------------------------------------------------------------------
+// | AntPHP 
+// +----------------------------------------------------------------------
+// | Copyright (c) 2019 http://antphp.duopinku.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: ghfhaifeng <ghfhaifeng@163.com>
+// +----------------------------------------------------------------------
+//框架视图
 
-class View{
+namespace antphp\base;
+
+class View
+{
     protected $_controller;
     protected $_action;
     protected $variables = array();
@@ -9,7 +21,8 @@ class View{
     /***
      * 构造函数
      */
-    function __construct($controller,$action){
+    function __construct($controller,$action)
+    {
         $this->_controller = strtolower($controller);
         $this->_action = strtolower($action);
     }
@@ -17,7 +30,8 @@ class View{
     /***
      * 分配变量
      */
-    public function assign($name,$value){
+    public function assign($name,$value)
+    {
         //赋值到变量
         $this->varables[$name] = $value;
     }
@@ -25,7 +39,8 @@ class View{
     /***
      * 渲染
      */
-    public function render(){
+    public function render()
+    {
         //从数组中将变量导入到当前的符号表
         extract($this->varables);
 

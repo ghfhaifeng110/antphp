@@ -1,16 +1,29 @@
 <?php
+// +----------------------------------------------------------------------
+// | AntPHP 
+// +----------------------------------------------------------------------
+// | Copyright (c) 2019 http://antphp.duopinku.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: ghfhaifeng <ghfhaifeng@163.com>
+// +----------------------------------------------------------------------
+//框架核心文件
 
-class Fastphp{
+class Antphp
+{
     protected $config = [];
 
-    public function __construct($config){
+    public function __construct($config)
+    {
         $this->config = $config;
     }
 
     /***
      * 运行程序
      */
-    public function run(){
+    public function run()
+    {
         //自动加载
         spl_autoload_register(array($this,'loadClass'));
 
@@ -30,7 +43,8 @@ class Fastphp{
     /***
      * 路由解析
      */
-    public function route(){
+    public function route()
+    {
         //判断是否有index.php
         $request_url = strpos($_SERVER['REQUEST_URI'],'index.php');
         if($request_url !== false){
@@ -68,7 +82,8 @@ class Fastphp{
     /***
      * 配置数据库信息
      */
-    public function setDbConfig(){
+    public function setDbConfig()
+    {
         if($this->config['db']){
             define('DB_HOST',$this->config['db']['host']);
             define('DB_NAME',$this->config['db']['dbname']);
@@ -80,7 +95,8 @@ class Fastphp{
     /***
      * 自动加载类
      */
-    public function loadClass($className){
+    public function loadClass($className)
+    {
         //内核文件命名空间映射关系
         $classMap = $this->classMap();
 
@@ -104,20 +120,22 @@ class Fastphp{
     /***
      * 内核文件命名空间映射关系
      */
-    public function classMap(){
+    public function classMap()
+    {
         return [
-            "fastphp\base\Controller"   => 'fastphp/base/Controller.php',
-            "fastphp\base\Model"        => 'fastphp/base/Model.php',
-            "fastphp\base\View"         => 'fastphp/base/View.php',
-            "fastphp\db\Db"             => 'fastphp/db/Db.php',
-            "fastphp\db\Sql"            => 'fastphp/db/Sql.php',
+            "antphp\base\Controller"   => 'antphp/base/Controller.php',
+            "antphp\base\Model"        => 'antphp/base/Model.php',
+            "antphp\base\View"         => 'antphp/base/View.php',
+            "antphp\db\Db"             => 'antphp/db/Db.php',
+            "antphp\db\Sql"            => 'antphp/db/Sql.php',
         ];
     }
 
     /***
      * 错误处理报告
      */
-    public function setReporting(){
+    public function setReporting()
+    {
         if(APP_DEBUG == true){
             //报告错误级别，E_ALL:报告所有错误, E_ERROR|E_WARNING|E_PARSE:报告runtime错误，E_NOTICE
             error_reporting(E_ALL); //ini_set("error_reporting",E_ALL);

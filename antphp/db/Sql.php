@@ -1,10 +1,22 @@
 <?php
-namespace fastphp\db;
+// +----------------------------------------------------------------------
+// | AntPHP 
+// +----------------------------------------------------------------------
+// | Copyright (c) 2019 http://antphp.duopinku.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: ghfhaifeng <ghfhaifeng@163.com>
+// +----------------------------------------------------------------------
+//数据库操作
 
-use fastphp\db\Db;
+namespace antphp\db;
+
+use antphp\db\Db;
 use \PDOStatement;
 
-class Sql{
+class Sql
+{
     //数据库表名
     protected $table;
     private $where;
@@ -19,14 +31,16 @@ class Sql{
     /***
      * 构造函数
      */
-    function __construct($table){
+    function __construct($table)
+    {
         $this->table = $table;
     }
 
     /***
      * 查询后返回的字段
      */
-    public function fields($fields){
+    public function fields($fields)
+    {
         if(!empty($fields)){
             $this->fields = $fields;
         }
@@ -37,7 +51,8 @@ class Sql{
     /***
      * 查询条件
      */
-    public function where($where = ''){
+    public function where($where = '')
+    {
         if($where){
             $this->where = ' WHERE '.$where;
         }
@@ -48,7 +63,8 @@ class Sql{
     /***
      * 排序
      */
-    public function order($order = ''){
+    public function order($order = '')
+    {
         if($order){
             $this->order = ' ORDER BY '.$order;
         }
@@ -59,7 +75,8 @@ class Sql{
     /***
      * 查询全部
      */
-    public function fetchAll(){
+    public function fetchAll()
+    {
         $sql = sprintf("SELECT %s from `%s` %s %s",$this->fields,$this->table,$this->where,$this->order);
         $sth = Db::pdo()->prepare($sql);
         $sth->execute(); //执行预处理语句
@@ -70,7 +87,8 @@ class Sql{
     /***
      * 查询一条
      */
-    public function fetch(){
+    public function fetch()
+    {
         $sql = sprintf("SELECT %s from `%s` %s %s",$this->fields,$this->table,$this->where,$this->order);
         $sth = Db::pdo()->prepare($sql);
         $sth->execute(); //执行预处理语句
@@ -83,7 +101,8 @@ class Sql{
      * @param $data:数据类型，数组
      * @return int 返回影响的行数
      */
-    public function add($data){
+    public function add($data)
+    {
         $sql = sprintf("insert into `%s` %s",$this->table,$this->formatInsert($data));
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth,$data);
@@ -95,7 +114,8 @@ class Sql{
     /***
      * 数据转成插入格式的SQL语句
      */
-    private function formatInsert($data){
+    private function formatInsert($data)
+    {
         $fields = array();
         $names = array();
 
@@ -123,7 +143,8 @@ class Sql{
      *
      * @return PDOStatement
      */
-    private function formatParam(PDOStatement $sth,$params = array()){
+    private function formatParam(PDOStatement $sth,$params = array())
+    {
         foreach($params as $param => &$value){
             $param = is_int($param) ? $param + 1 : ':'.ltrim($param,':');
             $sth->bindParam($param,$value);
