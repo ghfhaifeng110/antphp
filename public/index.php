@@ -26,7 +26,7 @@ define('APP_DEBUG', true);
 require(APP_PATH.'antphp/Antphp.php');
 
 //加载配置文件
-$config = require(APP_PATH.'config/config.php');
+//$config = require(APP_PATH.'config/config.php');
 
 //启动程序
 (new Antphp($config))->run();

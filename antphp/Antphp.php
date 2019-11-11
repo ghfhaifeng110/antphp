@@ -12,8 +12,11 @@
 
 class Antphp
 {
-    protected $config = [];
+    protected $config = []; //配置参数
 
+    /***
+     * 构造函数，配置参数赋值
+     */
     public function __construct($config)
     {
         $this->config = $config;
@@ -89,6 +92,7 @@ class Antphp
             define('DB_NAME',$this->config['db']['dbname']);
             define('DB_USER',$this->config['db']['username']);
             define('DB_PASS',$this->config['db']['password']);
+            define('DB_PORT',$this->config['db']['dbport']);
         }
     }
 
